@@ -12,9 +12,9 @@
               id="cityName"
               class="form-control"
               v-model="select.city"
-              @change="updateSelect;clearArea"
+              @change="updateSelect"
             >
-              <option value="">請選擇縣市</option>
+              <!-- <option value="">請選擇縣市</option> -->
               <option
                 :value="c.CityName"
                 v-for="c in cityName"
@@ -109,12 +109,15 @@ export default {
       const stores = this.data.filter((pharmacy) => {
         //  如果區域沒選
         if (!this.select.area) {
-          this.select.area = "";
+         
           let a = this.select.city;
           return pharmacy.properties.address.match(a);
         }
         // 區域有選擇
-        let b = this.select.city + this.select.area;
+        // let b = this.select.city + this.select.area;
+        let b = this.select.city+this.select.area ;
+      
+      //  this.select.area = "";
         return pharmacy.properties.address.match(b);
       });
 
@@ -215,6 +218,7 @@ export default {
 
       // osm.panTo(new L.LatLng(x, y));
       osm.setView([x,y],15)
+      this.select.area=''
       
     },
   },
