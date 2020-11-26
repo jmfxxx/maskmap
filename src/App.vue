@@ -49,7 +49,8 @@
         <h5>
           {{ select.city }}{{ select.area }}共{{ areastore.length }}間藥局
         </h5>
-        <div
+        <ul>
+        <li
           id="store"
           v-for="(item, index) in areastore"
           :key="index"
@@ -64,7 +65,8 @@
          
           <span style="color:blue">    小孩:{{ item.properties.mask_child }}</span><br>
           
-        </div>
+        </li>
+        </ul>
       </div>
 
       <!-- 顯示藥局位置 -->
@@ -116,15 +118,13 @@ export default {
           return pharmacy.properties.address.match(a);
         }
         // 區域有選擇
-        // let b = this.select.city + this.select.area;
         let b = this.select.city+this.select.area ;
       
       //  this.select.area = "";
         return pharmacy.properties.address.match(b);
       });
 
-
-      // 複制一份內容深烤貝，給this.areastore
+// 複制一份內容深烤貝，給this.areastore
       this.areastore = Object.assign([], stores);
 
       console.log("aaaa");
@@ -257,6 +257,7 @@ console.log(osm);
 #map {
   position: relative;
   height: 100vh;
+  
 }
 
 #store {
@@ -271,4 +272,13 @@ console.log(osm);
 #store:hover {
   background: yellow;
 }
+a {
+    cursor: pointer;
+  }
+  ul{
+    padding:0
+  }
+  li{
+    list-style: none;
+  }
 </style>
