@@ -102,9 +102,6 @@ export default {
       console.log(getcity);
       return this.cityName.find((city) => city.CityName === getcity).AreaList;
     },
-    clearArea(){
-      this.select.area='';
-    },
     // 更新地圖
     updateMap() {
       // 清除marker
@@ -113,24 +110,16 @@ export default {
       const stores = this.data.filter((pharmacy) => {
         //  如果區域沒選
         if (!this.select.area) {
-         
           let a = this.select.city;
           return pharmacy.properties.address.match(a);
         }
         // 區域有選擇
         let b = this.select.city+this.select.area ;
-      
-      //  this.select.area = "";
         return pharmacy.properties.address.match(b);
       });
 
 // 複制一份內容深烤貝，給this.areastore
       this.areastore = Object.assign([], stores);
-
-      console.log("aaaa");
-      console.log(stores);
-      console.log("-------------------------");
-
       // 畫制圖程坐標
       stores.forEach((pharmacy) => {
         // 透過藥局經緯度疊加標記
@@ -177,21 +166,14 @@ export default {
     },
     // 到指定藥局
     getPosition(index) {
-      console.log("click sotre");
-      console.log(osm.options);
       // 移到最上面
       window.scrollTo(0, 0);
-
-      console.log(index);
+      // console.log(index);
       console.log(this.areastore[index]);
       let y = this.areastore[index].geometry.coordinates[0];
       let x = this.areastore[index].geometry.coordinates[1];
-      // console.log(storeName)
-
-
       let marker1 = L.marker(
         [x, y],{
-          // elevation: 260.0,
           title: this.areastore[index].properties.name,
         }
       ).addTo(osm);
@@ -218,11 +200,8 @@ export default {
           }</small>`
         )
         .openPopup();
-
       // osm.panTo(new L.LatLng(x, y));
       osm.setView([x,y],15)
-      this.select.area=''
-      
     },
   },
   computed: {},
