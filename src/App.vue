@@ -61,7 +61,9 @@
           <span style="color:purple"
             >大人:{{ item.properties.mask_adult }}</span
           >
-          <span style="color:blue">小孩:{{ item.properties.mask_child }}</span>
+         
+          <span style="color:blue">    小孩:{{ item.properties.mask_child }}</span><br>
+          
         </div>
       </div>
 
@@ -210,6 +212,7 @@ export default {
           }</strong><br>
           地址: ${this.areastore[index].properties.address}<br>
           電話: ${this.areastore[index].properties.phone}<br>
+          <a href="https://www.google.com.tw/maps/place/${this.areastore[index].properties.address}" target="_blank"> Google地圖</a><br>
           <small>最後更新時間: ${
             this.areastore[index].properties.updated
           }</small>`
